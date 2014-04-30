@@ -1,9 +1,12 @@
 
+
 var app = angular.module('helpOutApp', []);
 
 app.controller('testController', function ($scope) {
-   $scope.title = 'Help Out';
-}
+
+   $scope.helpOut = 'Help Out';
+
+});
 
 
 /*

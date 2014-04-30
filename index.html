@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html ng-app"helpOutApp">
+<html lang="en">
   <head>
-    <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Help out</title>
+    <link rel='stylesheet' href='public/stylesheets/style.css' />
   </head>
-  <body >
+  <body ng-app="helpOutApp">
     <div ng-controller="testController">
-	    <h1>{{ title }}</h1>
-	    <p>Welcome to {{ title }}</p>
+	    <h1>{{helpOut}}</h1>
+	    <p>Welcome to {{helpOut}} application.</p>
     </div>
-  
-    
+
     <script type="text/javascript" src="public/js/angular.min.js" ></script>
+    <script type="text/javascript" src="app.js" ></script>
   </body>
 </html>
