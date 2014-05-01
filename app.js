@@ -4,7 +4,7 @@ var app = angular.module('helpOutApp', []);
 
 app.controller('testController', function ($scope) {
 
-   $scope.helpOut = 'Help Out';
+   $scope.helpOut = 'Help Out today';
 
 });
 
@@ -26,7 +26,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.json());
+app.use(express.json());d
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
