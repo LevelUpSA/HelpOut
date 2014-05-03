@@ -5,6 +5,14 @@ angular.module('EventController', []).controller('EventController', ['$scope', '
 	$scope.tagline = 'Create an event';
 
     $scope.createEvent = function(){
+
+        eventService.create($scope.event)
+            .success(function(data){
+                $scope.events = data;
+        });
+    }
+
+    $scope.editEvent = function(){
         var event = {};
         event['name'] = $scope.event.name;
         event['date'] = $scope.event.date;
@@ -12,7 +20,7 @@ angular.module('EventController', []).controller('EventController', ['$scope', '
         event['description'] = $scope.event.description;
         event['contact'] = $scope.event.contact;
 
-        eventService.create(event)
+        eventService.update(event.id)
             .success(function(data){
                 $scope.events = data;
         });

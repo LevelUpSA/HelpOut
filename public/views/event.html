@@ -24,15 +24,15 @@
         <div class="panel-heading">Events</div>
 
         <!-- Table -->
-        <table class="table primary " ng-repeat="event in events">
-            <tr>
+        <table class="table primary " >
+            <th>
                 <td>Event Name</td>
                 <td>Event Date</td>
                 <td>Event Time</td>
                 <td>Event Description</td>
                 <td>Contact Person</td>
-            </tr>
-            <tr>
+            </th>
+            <tr ng-repeat="event in events">
                 <td>{{event.name}}</td>
                 <td>{{event.date}}</td>
                 <td>{{event.time}}</td>

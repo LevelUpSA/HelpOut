@@ -16,7 +16,11 @@ angular.module('EventService', [])
 		// call to DELETE a event
 		delete : function(id) {
 			return $http.delete('/api/events/' + id);
-		}
+		},
+
+        update : function(id){
+            return $http.update('/api/events/' + id);
+        }
 	}
 	
 }]);
