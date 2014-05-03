@@ -4,15 +4,43 @@
 	<p>{{ tagline }}</p>
 
     <input class="form-control" type="text" ng-model="event.name" placeholder="Event name"/>
+    <input class="form-control" type="date" ng-model="event.date" placeholder="Event date">
+    <input class="form-control" type="text" ng-model="event.time" placeholder="Event time">
+    <input class="form-control" type="text" ng-model="event.description" placeholder="Event description">
+    <input class="form-control" type="text" ng-model="event.contact" placeholder="Event contact details">
     <br/>
     <button class="btn btn-primary" type="button" ng-click="createEvent()">Create Event</button>
     <br/><br/>
 
-    <div class="list-group event-list">
+   <!-- <div class="list-group event-list">
         <div href="#" class="list-group-item list-group-item-success">
             <span class="label label-success">Events</span>
         </div>
-        <div class="list-group-item" ng-repeat="event in events">{{event.name}}</div>
+        <div class="list-group-item" ng-repeat="event in events">event name: {{event.name}}, date: {{event.date}}</div>
+    </div>-->
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Events</div>
+
+        <!-- Table -->
+        <table class="table primary " ng-repeat="event in events">
+            <tr>
+                <td>Event Name</td>
+                <td>Event Date</td>
+                <td>Event Time</td>
+                <td>Event Description</td>
+                <td>Contact Person</td>
+            </tr>
+            <tr>
+                <td>{{event.name}}</td>
+                <td>{{event.date}}</td>
+                <td>{{event.time}}</td>
+                <td>{{event.description}}</td>
+                <td>{{event.contact}}</td>
+
+            </tr>
+        </table>
     </div>
 </div>
 

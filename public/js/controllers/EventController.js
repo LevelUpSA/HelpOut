@@ -7,6 +7,10 @@ angular.module('EventController', []).controller('EventController', ['$scope', '
     $scope.createEvent = function(){
         var event = {};
         event['name'] = $scope.event.name;
+        event['date'] = $scope.event.date;
+        event['time'] = $scope.event.time;
+        event['description'] = $scope.event.description;
+        event['contact'] = $scope.event.contact;
 
         eventService.create(event)
             .success(function(data){
