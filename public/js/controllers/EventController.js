@@ -1,16 +1,24 @@
+/**
+ * This module creates a controller that handle
+ * all logic related to events then sends the HTTP request.
+ */
 
-
-angular.module('EventController', []).controller('EventController', ['$scope', 'EventService' , function($scope, eventService) {
+angular.module('EventController', [])
+    .controller('EventController', ['$scope', '$http' , function($scope, $http) {
 
 	$scope.tagline = 'Create an event';
 
     $scope.createEvent = function(){
 
-        eventService.create($scope.event)
+        $http.post('/api/events', $scope.event)
             .success(function(data){
                 $scope.events = data;
-        });
-    }
+                $scope.event = {};
+            })
+            .error(function(err){
+                console.log('Error ' + err);
+            });
+    };
 
     $scope.editEvent = function(){
         var event = {};
@@ -20,16 +28,17 @@ angular.module('EventController', []).controller('EventController', ['$scope', '
         event['description'] = $scope.event.description;
         event['contact'] = $scope.event.contact;
 
-        eventService.update(event.id)
+        $http.update(event.id)
             .success(function(data){
                 $scope.events = data;
         });
     }
 
-    eventService.get()
+    $http.get('/api/events')
         .success(function(data){
             $scope.events = data;
-        }).error(function(error){
+        })
+        .error(function(error){
             console.log('Error: '+ error + ' when retrieving events')
         });
 }]);
