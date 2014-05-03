@@ -1,23 +1,24 @@
 <div class="jumbotron">
 	<h1>Events</h1>
 
-	<p>Create an events</p>
+	<p>Create an event</p>
 
-    <input class="form-control" type="text" ng-model="event.name" placeholder="Event name"/>
-    <input class="form-control" type="date" ng-model="event.date" placeholder="Event date">
-    <input class="form-control" type="text" ng-model="event.time" placeholder="Event time">
-    <input class="form-control" type="text" ng-model="event.description" placeholder="Event description">
-    <input class="form-control" type="text" ng-model="event.contact" placeholder="Event contact details">
-    <br/>
-    <button class="btn btn-primary" type="button" ng-click="createEvent()">Create Event</button>
-    <br/><br/>
+    <div class="row event-create" >
+        <input class="form-control bottom" type="text" ng-model="event.name" placeholder="Event name"/>
+        <input class="form-control" type="text" ng-model="event.location" placeholder="Event location"/>
+        <input class="form-control" type="date" ng-model="event.date" placeholder="Event date">
+        <input class="form-control" type="time" ng-model="event.time" placeholder="Event time">
+        <textarea class="form-control" rows="3" ng-model="event.description" placeholder="Description of the event"></textarea>
 
-   <!-- <div class="list-group event-list">
-        <div href="#" class="list-group-item list-group-item-success">
-            <span class="label label-success">Events</span>
-        </div>
-        <div class="list-group-item" ng-repeat="event in events">event name: {{event.name}}, date: {{event.date}}</div>
-    </div>-->
+        <button class="btn btn-primary" type="button" ng-click="createEvent()">Create Event</button>
+
+    </div>
+    <!-- <div class="list-group event-list">
+         <div href="#" class="list-group-item list-group-item-success">
+             <span class="label label-success">Events</span>
+         </div>
+         <div class="list-group-item" ng-repeat="event in events">event name: {{event.name}}, date: {{event.date}}</div>
+     </div>-->
 
     <div class="panel panel-default">
         <!-- Default panel contents -->

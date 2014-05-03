@@ -6,3 +6,13 @@
 .event-list span{
     font-size: 100%;
 }
+
+.event-create{
+    width: 390px;
+    padding-bottom: 10px;
+}
+
+
+.event-create input[type], textarea{
+    margin-bottom: 5px;
+}
