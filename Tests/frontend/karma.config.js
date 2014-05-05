@@ -15,7 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../.*js',
+      '../../public/lib/angular/angular.min.js',
+      '../../public/lib/**/*.js',
       '../../public/js/**/*.js',
       'angular-mocks.js',
       '*Test.js'
@@ -24,7 +25,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      
+        '../../public/lib/bootstrap/bootstrap.min.js'
     ],
 
 
@@ -42,7 +43,7 @@ module.exports = function(config) {
 
 
     // web server port
-    port: 9876,
+    port: 9877,
 
 
     // enable / disable colors in the output (reporters and logs)

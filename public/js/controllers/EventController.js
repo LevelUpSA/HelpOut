@@ -6,7 +6,7 @@
 angular.module('EventController', [])
     .controller('EventController', ['$scope', '$http' , function($scope, $http) {
 
-	$scope.tagline = 'Create an event';
+	$scope.subTitle = 'Create an event';
 
     $scope.createEvent = function(){
 
