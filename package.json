@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "karma start karma.config.js"
   },
   "dependencies": {
-      "express": "~3.5.0",
+    "express": "~3.5.0",
     "jasmine-node": "^1.14.3",
+    "karma": "^0.12.15",
+    "karma-jasmine": "^0.1.5",
     "mongojs": "~0.13.0"
   }
 }
