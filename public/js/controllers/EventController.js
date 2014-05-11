@@ -34,11 +34,4 @@ angular.module('EventController', [])
         });
     }
 
-    $http.get('/api/events')
-        .success(function(data){
-            $scope.events = data;
-        })
-        .error(function(error){
-            console.log('Error: '+ error + ' when retrieving events')
-        });
 }]);

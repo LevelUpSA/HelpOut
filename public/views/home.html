@@ -1,5 +1,19 @@
-<div class="jumbotron text-center">
-	<h1>Home Page 4 Life</h1>
-
-	<p>{{ tagline }}</p>
+<div class="jumbotron ">
+	<h2>Welcome to HelpOut</h2>
+    <p>
+        We need to put some text<br>
+        We need to put some text<br>
+        We need to put some text<br>
+    </p>
+    <div class="panel panel-default"  ng-repeat="event in events">
+        <div class="panel-heading  text-left">
+           <strong class="text-primary">{{event.name}}</strong>
+        </div>
+        <div class="panel-body text-left">
+            <strong class="text-">Event Description</strong>: {{event.description}}<br>
+            <strong>Event Date</strong>: {{event.date}}<br>
+            <strong>Event Time</strong>: {{event.time}}<br>
+            <strong>Event Location</strong>: {{event.location}}<br>
+        </div>
+    </div>
 </div>
