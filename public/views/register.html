@@ -2,4 +2,32 @@
 	<h1>Register a user</h1>
 
 	<p>{{ tagline }}</p>
+	<div class="event-create">
+		<input class="form-control" type="text" ng-model="user.name" placeholder="User name"/>
+		<input class="form-control" type="text" ng-model="user.email" placeholder="User email"/>
+		<input class="form-control" type="text" ng-model="user.password" placholder="User password"/> 
+
+		<button class="btn btn-primary" type="button" ng-click="createUser()">Create User</button>
+
+	</div>
+	<div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Your login details</div>
+
+        <!-- Table -->
+        <table class="table primary " >
+            <th>
+                <td>User Name</td>
+                <td>User email</td>
+                <td>User password</td>
+            </th>
+            <tr ng-repeat="user in registration">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+
+            </tr>
+        </table>
+    </div>
+
 </div>
