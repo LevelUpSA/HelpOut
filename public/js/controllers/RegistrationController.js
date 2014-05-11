@@ -7,31 +7,12 @@ angular.module('RegistrationController', [])
 
 		$http.post('/api/registration', $scope.user)
 		.success(function(data){
-			$scope.registration = data;
-			$scope.user = {};
+			$scope.user = data;
 		})
 		.error(function(err){
 			console.log('Error ' + err);
 		});
 	};
 
-	$scope.editUser = function(){
-		var user = {};
-		user['name'] = $scope.user.name;
-		user['email'] = $scope.user.email;
-		user['password'] = $scope.user.password;
-
-		$http.post(user.id)
-			.success(function(data){
-				$scope.registration = data;
-			});
-	}
-	$http.get('/api/registration')
-		.success(function(data){
-			$scope.registration = data;
-		})
-		.error(function(error){
-			console.log('Error: '+ error + 'Could not retrieve user')
-		});
 
 }]);
