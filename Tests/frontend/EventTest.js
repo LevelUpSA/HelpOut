@@ -17,7 +17,13 @@ describe('should test eventController', function(){
     }));
 
     it('should say subtitle is equal to Create an event', function(){
+
         expect(scope.subTitle).toBe('Create an event');
     });
+
+    it('should save an event ',function(){});
+    it('',function(){});
+    it('',function(){});
+    it('',function(){});
 });
 
