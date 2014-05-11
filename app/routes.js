@@ -2,11 +2,25 @@
 
         // database configuration
         var dburl = 'localhost/helpout';
-        var collections = ['events'];
+        var collections = ['events','user'];
         var db = require('mongojs').connect(dburl, collections);
 
         // server routes ===========================================================
-		app.get('/api/registration', function(req, res) {
+		
+
+        app.post('/api/registration', function(req, res){
+            var user = req.body;
+
+            db.registration.save(user, function(err,user){
+                if (err) 
+                    res.send(err);
+
+                console.log("user =" user);
+                res.json(user);
+            });
+        });
+
+        app.get('/api/registration', function(req, res) {
 			User.find(function(err, user) {
 
 				// if there is an error retrieving, send the error. nothing after res.send(err) will execute

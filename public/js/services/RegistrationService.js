@@ -1,4 +1,4 @@
-angular.module('RegistrationService', []).factory('User', ['$http', function($http) {
+angular.module('RegistrationService', []).factory('user', ['$http', function($http) {
 
 	return {
 		// call to get all users
