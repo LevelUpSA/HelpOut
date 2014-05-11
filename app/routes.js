@@ -11,17 +11,17 @@
         app.post('/api/registration', function(req, res){
             var user = req.body;
 
-            db.registration.save(user, function(err,user){
+            db.user.save(user, function(err, user){
                 if (err) 
                     res.send(err);
 
-                console.log("user =" user);
+                console.log("user = " + user);
                 res.json(user);
             });
         });
 
         app.get('/api/registration', function(req, res) {
-			User.find(function(err, user) {
+			db.user.findOne(function(err, user) {
 
 				// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 				if (err)
