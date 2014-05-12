@@ -4,15 +4,17 @@
  */
 
 angular.module('EventController', [])
-    .controller('EventController', ['$scope', '$http' , function($scope, $http) {
+    .controller('EventController', ['$scope', '$http' ,'$location', function($scope, $http, $location) {
 
 	$scope.subTitle = 'Create an event';
-
+    $scope.eventEdit = 'this';
+    $scope.isCreateBtn = false;
+    $scope.eventAction = "Add Event";
     $scope.createEvent = function(){
-
         $http.post('/api/events', $scope.event)
             .success(function(data){
                 $scope.events = data;
+                $scope.isCreateBtn = false;
                 $scope.event = {};
             })
             .error(function(err){
@@ -20,18 +22,21 @@ angular.module('EventController', [])
             });
     };
 
-    $scope.editEvent = function(){
-        var event = {};
-        event['name'] = $scope.event.name;
-        event['date'] = $scope.event.date;
-        event['time'] = $scope.event.time;
-        event['description'] = $scope.event.description;
-        event['contact'] = $scope.event.contact;
+    $scope.changeIsCreateBtn = function(){
+        $scope.isCreateBtn = true;
+        $scope.subTitle = 'Create an event';
+    };
 
-        $http.update(event.id)
-            .success(function(data){
-                $scope.events = data;
-        });
+    $scope.cancelCreateEvent = function(){
+        $scope.event = {};
+        $scope.isCreateBtn = false;
+    };
+
+    $scope.editEvent = function(event){
+       $scope.event = event;
+        $scope.isCreateBtn = true;
+        $scope.eventAction = "Save Event";
+        $scope.subTitle = 'Edit event';
     }
 
 }]);

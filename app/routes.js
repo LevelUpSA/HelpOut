@@ -6,13 +6,13 @@
         var db = require('mongojs').connect(dburl, collections);
 
         // server routes ===========================================================
-		
+
 
         app.post('/api/registration', function(req, res){
             var user = req.body;
 
             db.user.save(user, function(err, user){
-                if (err) 
+                if (err)
                     res.send(err);
 
                 console.log("user = " + user);
@@ -31,21 +31,32 @@
 			});
 		});
 
-        // route to handle creating (app.post)
+        // route to handle creating or editing event(app.post)
         app.post('/api/events', function(req, res){
             var event = req.body; // {'name': 'event1'}
 
-            db.events.save(event, function(err,eventData){
-                if(err)
-                    res.send(err);
-
-                db.events.find(function(err,events){
-                    if(err)
+            if(event._id !== undefined){
+                //update event
+                db.events.update({"_id":event._id},{$set: event }, function(err, updated) {
+                    if( err || !updated )
                         res.send(err);
-
-                    console.log("saved user = "+ eventData.name);
-                    res.json(events);
                 });
+
+            } else{
+                //create a new event
+                db.events.save(event, function(err,eventData){
+                    if(err){
+                        res.send(err);
+                    }
+                });
+            }
+
+            db.events.find(function (err, events) {
+                if (err){
+                    res.send(err);
+                } else {
+                    res.json(events);
+                }
             });
         });
 

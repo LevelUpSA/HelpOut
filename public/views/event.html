@@ -1,42 +1,43 @@
 <div class="jumbotron">
 	<h1>Events</h1>
 
-	<p>{{subTitle}}</p>
-
-    <div class="row event-create" >
-        <input class="form-control bottom" type="text" ng-model="event.name" placeholder="Event name"/>
-        <input class="form-control" type="text" ng-model="event.location" placeholder="Event location"/>
-        <input class="form-control" type="date" ng-model="event.date" placeholder="Event date">
-        <input class="form-control" type="time" ng-model="event.time" placeholder="Event time">
-        <textarea class="form-control" rows="3" ng-model="event.description" placeholder="Description of the event"></textarea>
-
-        <button class="btn btn-primary" type="button" ng-click="createEvent()">Create Event</button>
-
-    </div>
-
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
+    <div class="panel panel-default ">
         <div class="panel-heading">Events</div>
-
-        <!-- Table -->
         <table class="table primary text-left" >
             <tr>
                 <th>Event Name</th>
                 <th>Event Description</th>
+                <th>Event Location</th>
                 <th>Event Date</th>
                 <th>Event Time</th>
            </tr>
            <tr ng-repeat="event in events">
                 <td>{{event.name}}</td>
                 <td>{{event.description}}</td>
+                <td>{{event.location}}</td>
                 <td>{{event.date}}</td>
                 <td>{{event.time}}</td>
                 <td>
-                    <button class="btn btn-default" > Edit</button>
-
+                    <button class="btn btn-default" ng-click="editEvent(event)"> Edit</button>
                 </td>
             </tr>
         </table>
     </div>
+
+    <div class="event-create" ng-hide="isCreateBtn">
+        <button class="btn btn-primary" type="button" ng-click="changeIsCreateBtn()">Create Event</button>
+    </div>
+    <div class="event-create" ng-show="isCreateBtn">
+        <p>{{subTitle}}</p>
+        <input class="form-control bottom" type="text" ng-model="event.name" placeholder="Event name"/>
+        <input class="form-control" type="text" ng-model="event.location" placeholder="Event location"/>
+        <input class="form-control" type="date" ng-model="event.date" placeholder="Event date">
+        <input class="form-control" type="time" ng-model="event.time" placeholder="Event time">
+        <textarea class="form-control" rows="3" ng-model="event.description" placeholder="Description of the event"></textarea>
+
+        <button class="btn btn-primary" type="button" ng-click="createEvent()">{{eventAction}}</button>
+        <button class="btn btn-danger" type="button" ng-click="cancelCreateEvent()">Cancel</button>
+    </div>
+
 </div>
 
