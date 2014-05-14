@@ -12,6 +12,16 @@
     padding-bottom: 10px;
 }
 
+.ng-enter{
+    transition:0.75s;
+    opacity: 0;
+}
+.ng-enter-active{
+    opacity: 1;
+}
+.ng-leave{}
+.ng-leave-active{}
+
 .event-create input[type], textarea{
     margin-bottom: 5px;
 }

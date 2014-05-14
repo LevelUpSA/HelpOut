@@ -4,7 +4,7 @@
  */
 
 angular.module('EventController', [])
-    .controller('EventController', ['$scope', '$http' ,'$location', function($scope, $http, $location) {
+    .controller('EventController', ['$scope', '$http', function($scope, $http) {
 
 	$scope.subTitle = 'Create an event';
     $scope.eventEdit = 'this';
@@ -12,8 +12,8 @@ angular.module('EventController', [])
     $scope.eventAction = "Add Event";
     $scope.createEvent = function(){
         $http.post('/api/events', $scope.event)
-            .success(function(data){
-                $scope.events = data;
+            .success(function(response){
+                $scope.events = response;
                 $scope.isCreateBtn = false;
                 $scope.event = {};
             })
