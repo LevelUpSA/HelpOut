@@ -1,2 +1,2 @@
 angular.module('HelpOutApp',
-    ['ngRoute', 'appRoutes', 'MainController', 'RegistrationController', 'EventController']);
+    ['ngRoute', 'ngAnimate','appRoutes', 'MainController', 'RegistrationController', 'EventController']);

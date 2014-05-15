@@ -27,7 +27,7 @@
     <div class="event-create" ng-hide="isCreateBtn">
         <button class="btn btn-primary" type="button" ng-click="changeIsCreateBtn()">Create Event</button>
     </div>
-    <div class="event-create" ng-show="isCreateBtn">
+    <div id="event" class="event-create" ng-show="isCreateBtn">
         <p>{{subTitle}}</p>
         <input class="form-control bottom" type="text" ng-model="event.name" placeholder="Event name"/>
         <input class="form-control" type="text" ng-model="event.location" placeholder="Event location"/>
