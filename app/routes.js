@@ -3,8 +3,9 @@
         // database configuration
         var dburl = 'localhost/helpout';
         var collections = ['events','user'];
-        var db = require('mongojs').connect(dburl, collections);
-
+        var mongojs = require('mongojs');
+        var db = mongojs.connect(dburl, collections);
+        var ObjectId = mongojs.ObjectId;
         // server routes ===========================================================
 
 
@@ -36,11 +37,15 @@
             var event = req.body; // {'name': 'event1'}
 
             if(event._id !== undefined){
+                var id = ObjectId(event._id);
+                delete event._id;
                 //update event
-                db.events.update({"_id":event._id},{$set: event }, function(err, updated) {
+                db.events.update({"_id": id}, event, function(err, updated) {
                     if( err || !updated )
                         res.send(err);
+
                 });
+
 
             } else{
                 //create a new event

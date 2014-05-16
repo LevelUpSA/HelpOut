@@ -1,3 +1,10 @@
+.nav-pad{
+    padding-right: 10px;
+}
+
+.nav-pad button{
+    margin-right: 3px;
+}
 
 #event{
     transition: 0.75s all ease-out;
@@ -9,13 +16,11 @@
 }
 
 #event.ng-hide-remove, #event.ng-hide-add.ng-hide-add-active{
-    /*margin-left: -80px;*/
     margin-top: -20px;
     opacity: 0;
 }
 
 #event.ng-hide-remove.ng-hide-remove-active, #event.ng-hide-add{
-    /*margin-left: 0;*/
     margin-top: 0;
     opacity: 1;
 }
@@ -45,4 +50,8 @@
 
 .event-create input[type], textarea{
     margin-bottom: 5px;
+}
+
+.ngview{
+    margin-top: 74px;
 }

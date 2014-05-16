@@ -1,41 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<base href="/">
-	<title>Help Out</title>
-	<!-- CSS -->
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Help Out</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom styles -->
 </head>
 <body ng-app="HelpOutApp" ng-controller="MainController">
-<div class="container">
-	<!-- HEADER -->
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">Help Out App</a>
-		</div>
-		<!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-		<ul class="nav navbar-nav">
-			<li><a href="/register">Register</a></li>
-			<li><a href="/event">Events</a></li>
-		</ul>
-	</nav>
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
 
-   <!-- JS -->
-	<script src="lib/angular/angular.min.js"></script>
+<!-- HEADER -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Help Out App</a>
+        </div>
+        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+        <ul class="nav navbar-nav pull-right  nav-pad">
+            <li><a href="/event">Events</a></li>
+            <li><a href="#">Profile</a></li>
+            <li>
+                <button type="button" class="btn btn-success navbar-btn" go-click="/register">Register</button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-primary navbar-btn">Sign-in</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container ngview">
+    <!-- ANGULAR DYNAMIC CONTENT -->
+    <div ng-view></div>
+
+    <!-- JS -->
+    <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
     <script src="lib/angular/angular-animate.min.js"></script>
     <!-- ANGULAR CUSTOM -->
     <script src="js/controllers/MainController.js"></script>
-	<script src="js/controllers/RegistrationController.js"></script>
-	<script src="js/services/RegistrationService.js"></script>
-	<script src="js/controllers/EventController.js"></script>
-	<script src="js/services/EventService.js"></script>
-	<script src="js/appRoutes.js"></script>
-	<script src="js/app.js"></script>
+    <script src="js/controllers/RegistrationController.js"></script>
+    <script src="js/services/RegistrationService.js"></script>
+    <script src="js/controllers/EventController.js"></script>
+    <script src="js/services/EventService.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <script src="js/app.js"></script>
 </div>
 </body>
 </html>
