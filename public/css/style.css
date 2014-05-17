@@ -32,7 +32,21 @@
 .event-list span{
     font-size: 100%;
 }
+.search{
+    border:solid 1px #999999;
+    background-color: #ddd;
+    padding: 3px;
+    border-radius: 4px;
+}
 
+.search input[type='text']{
+    width: 270px;
+}
+
+
+.search input[type='date']{
+    width: 170px;
+}
 .event-create{
     width: 390px;
     padding-bottom: 10px;

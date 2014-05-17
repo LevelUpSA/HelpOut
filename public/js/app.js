@@ -1,5 +1,5 @@
 var app = angular.module('HelpOutApp',
-    ['ngRoute', 'ngAnimate','appRoutes', 'MainController', 'RegistrationController', 'EventController', 'LoginController']);
+    ['ngRoute', 'ngAnimate','appRoutes', 'MainController', 'RegistrationController', 'EventController', 'LoginController', 'SearchController']);
 
     app.directive( 'goClick', function ( $location ) {
         return function ( scope, element, attrs ) {

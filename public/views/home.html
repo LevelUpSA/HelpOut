@@ -1,19 +1,48 @@
 <div class="jumbotron ">
-	<h2>Welcome to HelpOut</h2>
-    <p>
-        We need to put some text<br>
-        We need to put some text<br>
-        We need to put some text<br>
-    </p>
-    <div class="panel panel-default"  ng-repeat="event in events">
-        <div class="panel-heading  text-left">
-           <strong class="text-primary">{{event.name}}</strong>
+
+    <div class="search pull-right" >
+        <input class="form-control bottom" type="text" ng-model="searchEvent.name"
+               placeholder="Search by Event Name"/>
+
+        <button class="btn-link btn-default" type="button" ng-click="isAdvancedSearch = !isAdvancedSearch">Advanced
+        </button>
+        <br/>
+
+        <div ng-show="isAdvancedSearch">
+            <input class="form-control bottom" type="text" ng-model="event.city" placeholder="Event City"/>
+
+            Date From:
+            <input class="form-control" type="date" ng-model="event.dateFrom" placeholder="Date From">
+
+            Date To:
+            <input class="form-control" type="date" ng-model="event.dateFrom" placeholder="Date To"> <br/>
+
+            <button class="btn btn-primary" type="button"> Search</button>
         </div>
-        <div class="panel-body text-left">
-            <strong class="text-">Event Description</strong>: {{event.description}}<br>
-            <strong>Event Date</strong>: {{event.date}}<br>
-            <strong>Event Time</strong>: {{event.time}}<br>
-            <strong>Event Location</strong>: {{event.location}}<br>
+    </div>
+
+    <h2>Welcome to HelpOut</h2>
+
+    <div>
+        <p>
+            We ne text<br>
+            We need to put some text<br>
+            We need to put some text<br>
+        </p>
+    </div>
+
+    <div>
+
+        <div class="panel panel-default" ng-repeat="event in events | filter:searchEvent">
+            <div class="panel-heading  text-left">
+                <strong class="text-primary">{{event.name}}</strong>
+            </div>
+            <div class="panel-body text-left">
+                <strong class="text-">Event Description</strong>: {{event.description}}<br>
+                <strong>Event Date</strong>: {{event.date}}<br>
+                <strong>Event Time</strong>: {{event.time}}<br>
+                <strong>Event Location</strong>: {{event.location}}<br>
+            </div>
         </div>
     </div>
 </div>
