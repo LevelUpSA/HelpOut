@@ -21,16 +21,22 @@
             });
         });
 
-        app.get('/api/registration', function(req, res) {
-			db.user.findOne(function(err, user) {
+       app.post('/api/login', function(req, res){
+            var userLogingInfo = req.body;
 
-				// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-				if (err)
-					res.send(err);
+            console.log("user " + userLogingInfo.username);
 
-				res.json(user); // return all users in JSON format
-			});
-		});
+            db.user.find(userLogingInfo, function(err, userData){
+                if (err || !userData){
+                    console.log("Con "+ err)
+                    res.send(err);
+                }
+                    
+
+                console.log("user = " + JSON.stringify(userData));
+                res.json(userData);
+            });
+        });
 
         // route to handle creating or editing event(app.post)
         app.post('/api/events', function(req, res){
