@@ -18,8 +18,13 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/event', {
 			templateUrl: 'views/event.html',
 			controller: 'EventController'
-		});
+		})
 
+        // login page that will use the LoginController
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginController'
+        });
 	$locationProvider.html5Mode(true);
 
 }]);

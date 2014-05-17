@@ -10,7 +10,13 @@ angular.module('EventController', [])
     $scope.eventEdit = 'this';
     $scope.isCreateBtn = false;
     $scope.eventAction = "Add Event";
+
     $scope.createEvent = function(){
+
+        if($scope.user != undefined){
+            $scope.event['user'] = $scope.user;
+        }
+
         $http.post('/api/events', $scope.event)
             .success(function(response){
                 $scope.events = response;

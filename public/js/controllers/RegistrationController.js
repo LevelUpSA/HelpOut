@@ -1,7 +1,7 @@
 angular.module('RegistrationController', [])
     .controller('RegistrationController', ['$scope', '$http' , function($scope, $http) {
 
-	$scope.tagline = 'Register to become a user';
+	$scope.subTitle = 'Register to become a member';
 
 	$scope.createUser = function(){
 

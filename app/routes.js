@@ -37,9 +37,9 @@
             var event = req.body; // {'name': 'event1'}
 
             if(event._id !== undefined){
+                //update event
                 var id = ObjectId(event._id);
                 delete event._id;
-                //update event
                 db.events.update({"_id": id}, event, function(err, updated) {
                     if( err || !updated )
                         res.send(err);
