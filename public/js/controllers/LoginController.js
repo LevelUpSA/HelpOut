@@ -2,23 +2,26 @@ angular.module('LoginController', [])
     .controller('LoginController', ['$scope', '$http', '$location' , function($scope, $http, $location) {
 
     $scope.login = function(){
-
-        $http.post('/api/login', $scope.user)
+        $scope.loginError = '';
+        $http.post('/api/login', $scope.loginInfo)
             .success(function(response){
                 $scope.user = response;
 
-        		console.log("user is " + $scope.user.username);
-        		if($scope.user.username !== undefined || $scope.user != ''){
+        		console.log("user is " + JSON.stringify($scope.user))  ;
+        		if($scope.user.username !== undefined ){
+                    $scope.isAuthenticated = true;
         			$location.path('/');
 				}
 				else
 				{
-					$location.path('/registration');
+//				   	$location.path('/register');
 				}
 
             })
             .error(function(err){
-                console.log('Error ' + err);
+                console.log('Error ' + err.message);
+                $scope.loginInfo.password = '';
+                $scope.loginError = err.message;
             });
     };
 

@@ -3,10 +3,10 @@
 
 	<p>{{ subTitle }}</p>
 	<div class="event-create">
-		<input class="form-control" type="text" ng-model="user.name" placeholder="User name"/>
+		<input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
 		<input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
 		<input class="form-control" type="password" ng-model="user.password" placeholder="Password">
-		<input class="form-control" type="password" ng-model="user.password" placeholder="Re-enter Password"> 
+		<input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
 
 		<button class="btn btn-primary" type="button" ng-click="createUser()">Create User</button>
 
