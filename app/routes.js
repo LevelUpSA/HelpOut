@@ -6,9 +6,10 @@
         var mongojs = require('mongojs');
         var db = mongojs.connect(dburl, collections);
         var ObjectId = mongojs.ObjectId;
-        // server routes ===========================================================
 
-
+        // ===========================================================
+        // ========= server routes (Handles REST then delegate to database)
+        // ===========================================================
         app.post('/api/registration', function(req, res){
             var user = req.body;
 
@@ -23,68 +24,65 @@
 
        app.post('/api/login', function(req, res){
             var userLogingInfo = req.body;
-
             console.log("user " + userLogingInfo.username);
 
             db.user.find(userLogingInfo, function(err, userData){
                 if (err || !userData){
-                    console.log("Con "+ err)
-                    res.send(err);
+                    throw err;
                 }
-                    
 
                 console.log("user = " + JSON.stringify(userData));
                 res.json(userData);
             });
         });
 
-        // route to handle creating or editing event(app.post)
         app.post('/api/events', function(req, res){
-            var event = req.body; // {'name': 'event1'}
-
+            var event = req.body;
             if(event._id !== undefined){
-                //update event
-                var id = ObjectId(event._id);
-                delete event._id;
-                db.events.update({"_id": id}, event, function(err, updated) {
-                    if( err || !updated )
-                        res.send(err);
-
-                });
-
-
+                updateEvent(event);
             } else{
-                //create a new event
-                db.events.save(event, function(err,eventData){
-                    if(err){
-                        res.send(err);
-                    }
-                });
+                createEvent();
             }
 
-            db.events.find(function (err, events) {
-                if (err){
-                    res.send(err);
-                } else {
-                    res.json(events);
-                }
-            });
+            retrieveEvents(res);
         });
 
         app.get('/api/events', function(req, res){
-            db.events.find(function(err,events){
-                if(err)
-                    res.send(err);
+            retrieveEvents(res);
+        });
+
+        app.get('*', function(req, res) {
+            res.sendfile('./public/index.html');
+        });
+
+        // =========================================================
+        // =====Persistence functions below (HANDLES Database CRUD)
+        // =========================================================
+        function retrieveEvents(res) {
+            db.events.find(function (err, events) {
+                if (err)
+                    throw err;
 
                 res.json(events);
             });
-        });
+        }
 
-        // route to handle delete (app.delete)
+        function updateEvent(event) {
+            var id = ObjectId(event._id);
+            delete event._id;
+            db.events.update({"_id": id}, event, function (err, updated) {
+                if (err || !updated)
+                    throw err;
 
-        // frontend routes =========================================================
-        // route to handle all angular requests
-        app.get('*', function(req, res) {
-			res.sendfile('./public/index.html'); // load our public/index.html file
-		});
+            });
+        }
+
+        function createEvent() {
+            db.events.save(event, function (err, eventData) {
+                if (err) {
+                    throw err;
+                }
+            });
+        }
+
 	};
