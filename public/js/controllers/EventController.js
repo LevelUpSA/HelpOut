@@ -11,9 +11,6 @@ angular.module('EventController', [])
         $scope.isCreateBtn = false;
         $scope.eventAction = "Add Event";
 
-        if ($scope.isAuthenticated === undefined) {
-            $scope.isAuthenticated = false;
-        }
         $scope.createEvent = function () {
 
             if ($scope.user != undefined) {

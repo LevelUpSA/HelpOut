@@ -74,11 +74,7 @@ module.exports = function (app) {
         db.user.find(userLogingInfo, function (err, userData) {
             if (err || !userData) {
                 console.log('in her');
-                throw err;
-            }
-            else if (userData.username === undefined) {
-                console.log("Login Error ");
-                res.jsonp(417, { message: 'Invalid login details' });
+                res.jsonp(417, { message: 'Error while trying to login' });
             } else {
                 console.log("user = " + JSON.stringify(userData));
                 res.json(userData);

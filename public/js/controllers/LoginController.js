@@ -1,21 +1,44 @@
 angular.module('LoginController', [])
-    .controller('LoginController', ['$scope', '$http', '$location' , function($scope, $http, $location) {
+    .controller('LoginController', ['$scope', '$http', '$location', 'LoginService' ,function($scope, $http, $location, LoginService) {
 
-    $scope.login = function(){
+//        $rootScope.isAuthenticated = LoginService.userExists();
+
+        $scope.login = function(){
+            $scope.loginErrorMessage = '';
+
+            LoginService.login($scope.loginInfo).then(function(data){
+                console.log(LoginService.userExists());
+                console.log('user is ' + LoginService.getUser());
+//                $scope.isAuthenticated = LoginService.userExists();
+                $location.path('/');
+            }, function(error){
+                console.log('error', error);
+                $scope.loginErrorMessage = error;
+            });
+
+
+        }
+
+        $scope.isAuthenticatedUser = function(){
+            return LoginService.userExists();
+        }
+
+    /*$scope.login = function(){
         $scope.loginError = '';
+        $scope.user = [];
         $http.post('/api/login', $scope.loginInfo)
             .success(function(response){
-                $scope.user = response;
 
-        		console.log("user is " + JSON.stringify($scope.user))  ;
-        		if($scope.user.username !== undefined ){
-                    $scope.isAuthenticated = true;
-        			$location.path('/');
-				}
+                if(response.length == 0 ){
+                    $scope.loginInfo.password = '';
+                    $scope.loginError = 'Invalid Login Details';
+                }
 				else
 				{
-//				   	$location.path('/register');
-				}
+                    $scope.user = response;
+                    $scope.isAuthenticated = true;
+                    $location.path('/event');
+                }
 
             })
             .error(function(err){
@@ -23,7 +46,7 @@ angular.module('LoginController', [])
                 $scope.loginInfo.password = '';
                 $scope.loginError = err.message;
             });
-    };
+    };*/
 
 
 }]);
