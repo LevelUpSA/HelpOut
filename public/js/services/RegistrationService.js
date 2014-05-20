@@ -1,21 +1,41 @@
-angular.module('RegistrationService', []).factory('user', ['$http', function($http) {
+angular.module('RegistrationService', [])
+    .factory('RegistrationService', ['$http', '$q', 'LoginService', function ($http, $q, LoginService) {
 
-	return {
-		// call to get all users
-		get : function() {
-			return $http.get('/api/registration');
-		},
+        return {
+            getUser: function (id) {
+                var defer = $q.defer();
 
-		// call to POST and create a new user
-		create : function(user) {
-			return $http.post('/api/registration', user);
-		},
+                $http.get('/api/registration' + id)
+                    .success(function (user) {
+                        defer.resolve(user);
+                    }).error(function (error) {
+                        defer.reject(error);
+                    });
+                return defer.promise;
+            },
 
-		// call to DELETE a user
-		delete : function(id) {
-			return $http.delete('/api/registration/' + id);
-		}
-	}		
+            register: function (user) {
+                var defer = $q.defer();
+                delete user.repassword;
 
-}]);
+                $http.post('/api/registration', user)
+                    .success(function (response) {
+                        defer.resolve(response);
+
+                        console.log('RegistrationService is user' + response);
+                        LoginService.setUser(response);
+                    }).error(function (error) {
+                        defer.reject(error);
+                    });
+
+                return defer.promise;
+            },
+
+            // call to DELETE a user
+            delete: function (id) {
+                return $http.delete('/api/registration/' + id);
+            }
+        }
+
+    }]);
 

@@ -1,5 +1,6 @@
 var app = angular.module('HelpOutApp',
-    ['ngRoute', 'ngAnimate', 'appRoutes', 'MainController', 'RegistrationController', 'EventController', 'LoginController', 'SearchController', 'LoginService','ApplicationService']);
+    ['ngRoute', 'ngAnimate', 'appRoutes', 'MainController', 'RegistrationController','EventController', 'LoginController', 'SearchController',
+     'LoginService','ApplicationService', 'RegistrationService','EventService']);
 
 app.directive('goClick', function ($location) {
     return function (scope, element, attrs) {
@@ -18,10 +19,5 @@ app.directive('goClick', function ($location) {
 });
 
 app.run(function(LoginService, ApplicationService){
-    console.log('is in');
-    if(LoginService.userExists()){
-        ApplicationService.makeReady();
-        $scope.isAuthenticated = LoginService.userExists();
-        console.log('is auth' + LoginService.userExists());
-    }
+
 });

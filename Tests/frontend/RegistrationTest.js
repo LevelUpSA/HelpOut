@@ -6,10 +6,12 @@ describe('Test Registration Controller', function(){
 
     beforeEach(module('HelpOutApp'));
     beforeEach(module('RegistrationController'));
+    beforeEach(module('RegistrationService'));
 
     beforeEach(inject(function($injector){
         $httpBackend = $injector.get('$httpBackend');
         $rootScope = $injector.get('$rootScope');
+
         var $controller = $injector.get('$controller');
         registrationController = $controller('RegistrationController', {'$scope': $rootScope});
 

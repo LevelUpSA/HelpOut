@@ -86,9 +86,9 @@ module.exports = function (app) {
     function registerUser(user, res) {
         db.user.save(user, function (err, user) {
             if (err)
-                res.send(err);
+                res.jsonp(err);
 
-            console.log("user = " + user);
+            console.log("user = " + JSON.stringify(user));
             res.json(user);
         });
     }

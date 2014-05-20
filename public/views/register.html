@@ -1,36 +1,17 @@
 <div class="jumbotron">
-	<h1>User Registration</h1>
+    <h2>User Registration</h2>
 
-	<p>{{ subTitle }}</p>
-	<div class="event-create">
-		<input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
-		<input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
-		<input class="form-control" type="password" ng-model="user.password" placeholder="Password">
-		<input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
+    <p>{{ subTitle }}</p>
 
-		<button class="btn btn-primary" type="button" ng-click="createUser()">Create User</button>
+    <div class="event-create">
+        <form name="regitration" ng-submit="register()">
+            <input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
+            <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
+            <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
+            <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
 
-	</div>
-	
-
-<!--	<div class="panel panel-default"> -->
-        <!-- Default panel contents -->
-        <!--<div class="panel-heading">Your login details</div> -->
-
-        <!-- Table -->
-        <!-- <table class="table primary " >
-            <th>
-                <td>User Name</td>
-                <td>User email</td>
-                <td>User password</td>
-            </th>
-            <tr ng-repeat="user in registration">
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.password}}</td>
-
-            </tr>
-        </table>
-    </div> --> 
+            <button class="btn btn-primary" type="button" >Create User</button>
+        </form>
+    </div>
 
 </div>

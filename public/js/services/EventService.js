@@ -1,11 +1,20 @@
 angular.module('EventService', [])
 
-    .factory('EventService', ['$http', function($http) {
+    .factory('EventService', ['$http','$q', function($http, $q) {
 
 	return {
 		// call to get all events
-		get : function() {
-			return $http.get('/api/events');
+		retrieveAll : function() {
+            var defer = $q.defer();
+
+            $http.get('/api/events')
+                .success(function(events){
+                    defer.resolve(events);
+                }).error(function(error){
+                    defer.reject(error);
+                });
+
+			return defer.promise;
 		},
 
 		// call to POST and create a new event

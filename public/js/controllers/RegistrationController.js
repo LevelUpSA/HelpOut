@@ -1,20 +1,16 @@
 angular.module('RegistrationController', [])
-    .controller('RegistrationController', ['$scope', '$http' ,'$location', function($scope, $http, $location) {
+    .controller('RegistrationController', ['$scope' , '$location', 'RegistrationService', function ($scope, $location, RegistrationService) {
 
-	$scope.subTitle = 'Register to become a member';
+        $scope.subTitle = 'Register to become a member';
 
-	$scope.createUser = function(){
+        $scope.register = function () {
+            RegistrationService.register($scope.user)
+                .then(function (user) {
+                    $location.path('/profile');
+                }, function (error) {
 
-		$http.post('/api/registration', $scope.user)
-		.success(function(data){
-			$scope.user = data;
-            $location.path('/event');
-		    $scope.isAuthenticated = true;
-		})
-		.error(function(err){
-			console.log('Error ' + err);
-		});
-	};
+                });
+        };
 
 
-}]);
+    }]);

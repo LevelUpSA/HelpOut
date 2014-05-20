@@ -24,7 +24,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/login', {
             templateUrl: 'views/login.html',
             controller: 'LoginController'
-        }).otherwise({
+        })
+
+        .when('/profile', {
+            templateUrl: 'views/profile.html',
+            controller: 'MainController'
+        })
+
+        .otherwise({
             redirectTo:'/'
         });
 	$locationProvider.html5Mode(true);
