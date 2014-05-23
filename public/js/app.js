@@ -1,6 +1,6 @@
 var app = angular.module('HelpOutApp',
-    ['ngRoute', 'ngAnimate', 'appRoutes', 'MainController', 'RegistrationController','EventController', 'LoginController', 'SearchController',
-     'LoginService','ApplicationService', 'RegistrationService','EventService']);
+    ['ngRoute', 'ngAnimate', 'appRoutes', 'MainController', 'RegistrationController', 'EventController', 'LoginController', 'SearchController',
+        'LoginService', 'ApplicationService', 'RegistrationService', 'EventService']);
 
 app.directive('goClick', function ($location) {
     return function (scope, element, attrs) {
@@ -18,6 +18,15 @@ app.directive('goClick', function ($location) {
     }
 });
 
-app.run(function(LoginService, ApplicationService){
+app.run(['$rootScope', '$location', 'LoginService', function ($rootScope, $location, LoginService) {
+    $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
-});
+        if(next.access.isPrivate) {
+            if (!LoginService.userExists()) {
+                console.log('DENY');
+                event.preventDefault();
+                $location.path('/login');
+            }
+        }
+    });
+}]);

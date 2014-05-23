@@ -17,7 +17,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		// event page that will use the EventController
 		.when('/event', {
 			templateUrl: 'views/event.html',
-			controller: 'EventController'
+			controller: 'EventController',
+            access: {
+                isPrivate: true
+            }
 		})
 
         // login page that will use the LoginController
