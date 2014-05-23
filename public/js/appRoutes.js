@@ -14,7 +14,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		// registration page that will use the RegistrationController
 		.when('/register', {
 			templateUrl: 'views/register.html',
-			controller: 'RegistrationController'
+			controller: 'RegistrationController',
+            access: {
+                isPrivate: false
+            }
 		})
 
 		// event page that will use the EventController
