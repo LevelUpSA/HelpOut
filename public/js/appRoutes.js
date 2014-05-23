@@ -5,7 +5,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		// home page
 		.when('/', {
 			templateUrl: 'views/home.html',
-			controller: 'MainController'
+			controller: 'MainController',
+            access: {
+                isPrivate: false
+            }
 		})
 
 		// registration page that will use the RegistrationController
@@ -26,12 +29,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         // login page that will use the LoginController
         .when('/login', {
             templateUrl: 'views/login.html',
-            controller: 'LoginController'
+            controller: 'LoginController',
+            access: {
+                isPrivate: false
+            }
         })
 
         .when('/profile', {
             templateUrl: 'views/profile.html',
-            controller: 'MainController'
+            controller: 'MainController',
+            access: {
+                isPrivate: true
+            }
         })
 
         .otherwise({
