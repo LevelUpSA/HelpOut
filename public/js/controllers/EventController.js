@@ -4,41 +4,45 @@
  */
 
 angular.module('EventController', [])
-    .controller('EventController', ['$scope', '$http' , function($scope, $http) {
+    .controller('EventController', ['$scope', '$http', function ($scope, $http) {
 
-	$scope.subTitle = 'Create an event';
+        $scope.subTitle = 'Create an event';
+        $scope.eventEdit = 'this';
+        $scope.isCreateBtn = false;
+        $scope.eventAction = "Add Event";
 
-    $scope.createEvent = function(){
+        $scope.createEvent = function () {
 
-        $http.post('/api/events', $scope.event)
-            .success(function(data){
-                $scope.events = data;
-                $scope.event = {};
-            })
-            .error(function(err){
-                console.log('Error ' + err);
-            });
-    };
+            if ($scope.user != undefined) {
+                $scope.event['user'] = $scope.user;
+            }
 
-    $scope.editEvent = function(){
-        var event = {};
-        event['name'] = $scope.event.name;
-        event['date'] = $scope.event.date;
-        event['time'] = $scope.event.time;
-        event['description'] = $scope.event.description;
-        event['contact'] = $scope.event.contact;
+            $http.post('/api/events', $scope.event)
+                .success(function (response) {
+                    $scope.events = response;
+                    $scope.isCreateBtn = false;
+                    $scope.event = {};
+                })
+                .error(function (err) {
+                    console.log('Error ' + JSON.stringify(err));
+                });
+        };
 
-        $http.update(event.id)
-            .success(function(data){
-                $scope.events = data;
-        });
-    }
+        $scope.changeIsCreateBtn = function () {
+            $scope.isCreateBtn = true;
+            $scope.subTitle = 'Create an event';
+        };
 
-    $http.get('/api/events')
-        .success(function(data){
-            $scope.events = data;
-        })
-        .error(function(error){
-            console.log('Error: '+ error + ' when retrieving events')
-        });
-}]);
+        $scope.cancelCreateEvent = function () {
+            $scope.event = {};
+            $scope.isCreateBtn = false;
+        };
+
+        $scope.editEvent = function (event) {
+            $scope.event = event;
+            $scope.isCreateBtn = true;
+            $scope.eventAction = "Save Event";
+            $scope.subTitle = 'Edit event';
+        }
+
+    }]);

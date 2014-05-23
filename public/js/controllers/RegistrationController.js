@@ -1,6 +1,16 @@
 angular.module('RegistrationController', [])
-    .controller('RegistrationController', ['$scope', '$http' , function($scope, $http) {
+    .controller('RegistrationController', ['$scope' , '$location', 'RegistrationService', function ($scope, $location, RegistrationService) {
 
-	$scope.tagline = 'I am inside registration controller';
+        $scope.subTitle = 'Register to become a member';
 
-}]);
+        $scope.register = function () {
+            RegistrationService.register($scope.user)
+                .then(function (user) {
+                    $location.path('/profile');
+                }, function (error) {
+
+                });
+        };
+
+
+    }]);

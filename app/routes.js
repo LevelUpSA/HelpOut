@@ -1,54 +1,96 @@
-	module.exports = function(app) {
+module.exports = function (app) {
 
-        // database configuration
-        var dburl = 'localhost/helpout';
-        var collections = ['events'];
-        var db = require('mongojs').connect(dburl, collections);
+    // database configuration
+    var dburl = 'localhost/helpout';
+    var collections = ['events', 'user'];
+    var mongojs = require('mongojs');
+    var db = mongojs.connect(dburl, collections);
+    var ObjectId = mongojs.ObjectId;
 
-        // server routes ===========================================================
-		app.get('/api/registration', function(req, res) {
-			User.find(function(err, user) {
+    // ===========================================================
+    // ========= server routes (Handles REST then delegate to database)
+    // ===========================================================
 
-				// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-				if (err)
-					res.send(err);
+    app.post('/api/registration', function (req, res) {
+        var user = req.body;
+        registerUser(user, res);
+    });
 
-				res.json(user); // return all users in JSON format
-			});
-		});
+    app.post('/api/login', function (req, res) {
+        var userLogingInfo = req.body;
+        userLoging(userLogingInfo, res);
+    });
 
-        // route to handle creating (app.post)
-        app.post('/api/events', function(req, res){
-            var event = req.body; // {'name': 'event1'}
+    app.post('/api/events', function (req, res) {
+        var event = req.body;
+        if (event._id !== undefined) {
+            updateEvent(event);
+        } else {
+            createEvent();
+        }
 
-            db.events.save(event, function(err,eventData){
-                if(err)
-                    res.send(err);
+        retrieveEvents(res);
+    });
 
-                db.events.find(function(err,events){
-                    if(err)
-                        res.send(err);
+    app.get('/api/events', function (req, res) {
+        retrieveEvents(res);
+    });
 
-                    console.log("saved user = "+ eventData.name);
-                    res.json(events);
-                });
-            });
+    app.get('*', function (req, res) {
+        res.sendfile('./public/index.html');
+    });
+
+    // =========================================================
+    // =====Persistence functions below (HANDLES Database CRUD)
+    // =========================================================
+    function retrieveEvents(res) {
+        db.events.find(function (err, events) {
+            if (err)
+                throw err;
+
+            res.json(events);
         });
+    }
 
-        app.get('/api/events', function(req, res){
-            db.events.find(function(err,events){
-                if(err)
-                    res.send(err);
+    function updateEvent(event) {
+        var id = ObjectId(event._id);
+        delete event._id;
+        db.events.update({"_id": id}, event, function (err, updated) {
+            if (err || !updated)
+                throw err;
 
-                res.json(events);
-            });
         });
+    }
 
-        // route to handle delete (app.delete)
+    function createEvent() {
+        db.events.save(event, function (err, eventData) {
+            if (err) {
+                throw err;
+            }
+        });
+    }
 
-        // frontend routes =========================================================
-        // route to handle all angular requests
-        app.get('*', function(req, res) {
-			res.sendfile('./public/index.html'); // load our public/index.html file
-		});
-	};
+    function userLoging(userLogingInfo, res) {
+        db.user.find(userLogingInfo, function (err, userData) {
+            if (err || !userData) {
+                console.log('in her');
+                res.jsonp(417, { message: 'Error while trying to login' });
+            } else {
+                console.log("user = " + JSON.stringify(userData));
+                res.json(userData);
+            }
+
+        });
+    }
+
+    function registerUser(user, res) {
+        db.user.save(user, function (err, user) {
+            if (err)
+                res.jsonp(err);
+
+            console.log("user = " + JSON.stringify(user));
+            res.json(user);
+        });
+    }
+
+};

@@ -1,40 +1,60 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<base href="/">
-	<title>Help Out</title>
-	<!-- CSS -->
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Help Out</title>
+    <!-- CSS -->
     <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom styles -->
 </head>
 <body ng-app="HelpOutApp" ng-controller="MainController">
-<div class="container">
-	<!-- HEADER -->
-	<nav class="navbar navbar-inverse">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="/">Help Out App</a>
-		</div>
-		<!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-		<ul class="nav navbar-nav">
-			<li><a href="/register">Register</a></li>
-			<li><a href="/event">Events</a></li>
-		</ul>
-	</nav>
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
 
-   <!-- JS -->
-	<script src="lib/angular/angular.min.js"></script>
+<!-- HEADER -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Help Out App</a>
+        </div>
+        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+        <ul class="nav navbar-nav pull-right  nav-pad">
+            <li ng-show="isAuthenticated()"><a href="/event">Events</a></li>
+
+            <li ng-show="isAuthenticated()"><a href="/profile">Profile</a></li>
+            <li ng-hide="isAuthenticated()">
+                <button type="button" class="btn btn-success navbar-btn" go-click="/register">Register</button>
+            </li>
+            <li ng-hide="isAuthenticated()">
+                <button type="button" class="btn btn-primary navbar-btn" go-click="/login">Sign-in</button>
+            </li><li ng-show="isAuthenticated()">
+                <button type="button" class="btn btn-danger navbar-btn" ng-click="logout()">Sign-out</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container ngview">
+    <!-- ANGULAR DYNAMIC CONTENT -->
+    <div ng-view></div>
+    <!--<div ng-include="template"></div>-->
+
+    <!-- JS -->
+    <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/angular/angular-animate.min.js"></script>
     <!-- ANGULAR CUSTOM -->
+    <script src="js/app.js"></script>
     <script src="js/controllers/MainController.js"></script>
-	<script src="js/controllers/RegistrationController.js"></script>
-	<script src="js/services/RegistrationService.js"></script>
-	<script src="js/controllers/EventController.js"></script>
-	<script src="js/services/EventService.js"></script>
-	<script src="js/appRoutes.js"></script>
-	<script src="js/app.js"></script>
+    <script src="js/controllers/RegistrationController.js"></script>
+    <script src="js/controllers/EventController.js"></script>
+    <script src="js/controllers/LoginController.js"></script>
+    <script src="js/controllers/SearchController.js"></script>
+    <script src="js/services/RegistrationService.js"></script>
+    <script src="js/services/EventService.js"></script>
+    <script src="js/services/LoginService.js"></script>
+    <script src="js/services/ApplicationService.js"></script>
+    <script src="js/appRoutes.js"></script>
 </div>
 </body>
 </html>

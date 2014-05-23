@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "karma start karma.config.js"
+    "test": "karma start config/karma.conf.js"
   },
   "dependencies": {
     "express": "~3.5.0",

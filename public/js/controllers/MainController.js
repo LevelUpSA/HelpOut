@@ -1,5 +1,24 @@
-angular.module('MainController', []).controller('MainController', function($scope) {
+angular.module('MainController', [])
+    .controller('MainController', ['$scope', '$http' , '$location', 'LoginService', 'EventService', function ($scope, $http, $location, LoginService, EventService) {
 
-	$scope.tagline = 'To the moon and back! Welcome to HelpOut App';
+        $scope.isAuthenticated = function () {
+            return LoginService.userExists();
+        };
 
-});
+        $scope.getUser = function () {
+            return LoginService.getUser();
+        };
+
+        EventService.retrieveAll()
+            .then(function (events) {
+                $scope.events = events;
+            }, function (error) {
+                console.log('Error: ' + error + ' when retrieving events')
+            });
+
+        $scope.logout = function () {
+            LoginService.logout();
+            $location.path('/');
+        }
+
+    }]);

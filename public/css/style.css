@@ -1,3 +1,29 @@
+.nav-pad{
+    padding-right: 10px;
+}
+
+.nav-pad button{
+    margin-right: 3px;
+}
+
+#event{
+    transition: 0.75s all ease-out;
+}
+
+#event.ng-hide-add, #event.ng-hide-remove
+{
+    display: block !important;
+}
+
+#event.ng-hide-remove, #event.ng-hide-add.ng-hide-add-active{
+    margin-top: -20px;
+    opacity: 0;
+}
+
+#event.ng-hide-remove.ng-hide-remove-active, #event.ng-hide-add{
+    margin-top: 0;
+    opacity: 1;
+}
 
 .event-list{
     width: 230px;
@@ -6,13 +32,40 @@
 .event-list span{
     font-size: 100%;
 }
+.search{
+    border:solid 1px #999999;
+    background-color: #ddd;
+    padding: 3px;
+    border-radius: 4px;
+}
 
+.search input[type='text']{
+    width: 270px;
+}
+
+
+.search input[type='date']{
+    width: 170px;
+}
 .event-create{
     width: 390px;
     padding-bottom: 10px;
 }
 
+.ng-enter{
+    transition:0.75s;
+    opacity: 0;
+}
+.ng-enter-active{
+    opacity: 1;
+}
+.ng-leave{}
+.ng-leave-active{}
 
 .event-create input[type], textarea{
     margin-bottom: 5px;
+}
+
+.ngview{
+    margin-top: 74px;
 }

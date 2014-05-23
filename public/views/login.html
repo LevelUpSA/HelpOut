@@ -1,0 +1,16 @@
+<div class="jumbotron ">
+    <h2>Sign in</h2>
+    <h4>
+        <span class="label label-danger">{{loginErrorMessage}}</span>
+        <span>{{isAuthenticated}}</span>
+    </h4>
+
+    <form name="loginForm" ng-submit="login()">
+        <div class="event-create">
+            <input class="form-control" type="text" ng-model="loginInfo.email" placeholder="Email"/>
+            <input class="form-control" type="password" ng-model="loginInfo.password" placeholder="Password">
+            <span> Do not have an account ? <a href="/register"> register</a></span><br/><br/>
+            <button class="btn btn-success" type="submit" >Login</button>
+        </div>
+    </form>
+</div>
