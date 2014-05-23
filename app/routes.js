@@ -26,7 +26,7 @@ module.exports = function (app) {
         if (event._id !== undefined) {
             updateEvent(event);
         } else {
-            createEvent();
+            createEvent(event);
         }
 
         retrieveEvents(res);
@@ -62,7 +62,7 @@ module.exports = function (app) {
         });
     }
 
-    function createEvent() {
+    function createEvent(event) {
         db.events.save(event, function (err, eventData) {
             if (err) {
                 throw err;
