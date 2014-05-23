@@ -1,16 +1,27 @@
 <div class="jumbotron">
+
     <h2>User Registration</h2>
 
     <p>{{ subTitle }}</p>
 
-    <div class="event-create">
-        <form name="registration" ng-submit="register()" >
+    <div class="event-create" ng-hide="isNextClicked">
             <input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
             <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
             <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
             <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
 
-            <button class="btn btn-primary" type="submit" >Create User</button>
-        </form>
+            <button class="btn btn-primary" type="button" ng-click="changeIsCreateBtn()">Next</button>
+        
+    </div>
+
+    <div class="event-create" ng-show="isNextClicked">
+            <input class="form-control" type="text" ng-model="user.username" placeholder="Name :"/>
+            <input class="form-control" type="text" ng-model="user.email" placeholder="Surname :"/>
+
+            <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
+            <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
+
+            <button class="btn btn-primary" type="button" ng-click="register()" >Create User</button>
     </div>
 </div>
+
