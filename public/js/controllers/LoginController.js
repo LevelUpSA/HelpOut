@@ -1,6 +1,8 @@
 angular.module('LoginController', [])
     .controller('LoginController', ['$scope', '$location', 'LoginService' ,function($scope, $location, LoginService) {
 
+        $scope.subTitle = "Sign in";
+
         $scope.login = function(){
             $scope.loginErrorMessage = '';
 
