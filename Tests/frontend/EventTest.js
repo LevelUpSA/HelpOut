@@ -29,10 +29,16 @@ describe('Test eventController', function(){
     });
 
     it('should create an event',function(){
+
+        expect($rootScope.isCreateBtn).toBeFalsy();
+        expect($rootScope.eventAction).toBe('Add Event');
+        expect($rootScope.subTitle).toBe('Create an event');
         // mocks the http.post call in createEvent method
         $httpBackend.expectPOST('/api/events').respond(201,'ok');
         expect(eventController).toBeDefined();
+
         $rootScope.createEvent();
+
         $httpBackend.flush();
     });
 

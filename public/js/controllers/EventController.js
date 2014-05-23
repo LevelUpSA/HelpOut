@@ -26,6 +26,7 @@ angular.module('EventController', [])
                 .error(function (err) {
                     console.log('Error ' + JSON.stringify(err));
                 });
+
         };
 
         $scope.changeIsCreateBtn = function () {
