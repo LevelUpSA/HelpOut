@@ -4,13 +4,13 @@
     <p>{{ subTitle }}</p>
 
     <div class="event-create">
-        <form name="regitration" ng-submit="register()">
+        <form name="registration" ng-submit="register()">
             <input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
             <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
             <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
             <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
 
-            <button class="btn btn-primary" type="button" >Create User</button>
+            <button class="btn btn-primary" type="submit" >Create User</button>
         </form>
     </div>
 
