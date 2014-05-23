@@ -1,9 +1,10 @@
 angular.module('LoginController', [])
-    .controller('LoginController', ['$scope', '$location', 'LoginService' ,function($scope, $location, LoginService) {
+    .controller('LoginController', ['$scope', 'LoginService', '$location' ,function($scope,  LoginService, $location) {
 
         $scope.subTitle = "Sign in";
 
         $scope.login = function(){
+
             $scope.loginErrorMessage = '';
 
             LoginService.login($scope.loginInfo)
