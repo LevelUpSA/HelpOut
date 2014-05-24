@@ -2,6 +2,10 @@
     padding-right: 10px;
 }
 
+.well-labels label{
+    display: block;
+    font-style: none;
+}
 .nav-pad button{
     margin-right: 3px;
 }

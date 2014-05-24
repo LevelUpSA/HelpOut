@@ -5,23 +5,31 @@
     <p>{{ subTitle }}</p>
 
     <div class="event-create" ng-hide="isNextClicked">
-            <input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
-            <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
-            <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
-            <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
+        <input class="form-control" type="text" ng-model="user.username" placeholder="User name"/>
+        <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
+        <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
+        <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
 
-            <button class="btn btn-primary" type="button" ng-click="changeIsCreateBtn()">Next</button>
-        
+        <button class="btn btn-primary" type="button" ng-click="goToNext()">Next</button>
+
     </div>
 
     <div class="event-create" ng-show="isNextClicked">
-            <input class="form-control" type="text" ng-model="user.username" placeholder="Name :"/>
-            <input class="form-control" type="text" ng-model="user.email" placeholder="Surname :"/>
+        <input class="form-control" type="text" ng-model="user.name" placeholder="Name"/>
+        <input class="form-control" type="text" ng-model="user.surname" placeholder="Surname" placeholder="Name"/>
 
-            <input class="form-control" type="password" ng-model="user.password" placeholder="Password">
-            <input class="form-control" type="password" ng-model="user.repassword" placeholder="Re-enter Password">
+        <select class="form-control" ng-model="user.county.name" ng-options="c.name for c in countries"
+         </select>
+        <input class="form-control" type="text" ng-model="user.city" placeholder="City">
 
-            <button class="btn btn-primary" type="button" ng-click="register()" >Create User</button>
+        <div class="well-labels">
+            <label style="text-decoration: underline">Interests</label>
+            <label ng-repeat="interest in interests">
+                <input type="checkbox" checklist-model="my.interest" checklist-value="interest"> {{interest}}
+            </label>
+        </div>
+        <button class="btn btn-primary" type="button" ng-click="register()">Create User</button>
+        <button class="btn btn-danger" type="button" ng-click="goBack()">Back</button>
     </div>
 </div>
 
