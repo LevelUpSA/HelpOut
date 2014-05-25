@@ -7,7 +7,7 @@ module.exports = function (app) {
     var db = mongojs.connect(dburl, collections);
     var ObjectId = mongojs.ObjectId;
 
-    var registration = require('./api/registration')
+    var registration = require('./api/UserService')
     var eventService = require('./api/EventService');
 
     // ===========================================================
