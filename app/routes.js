@@ -7,6 +7,9 @@ module.exports = function (app) {
     var db = mongojs.connect(dburl, collections);
     var ObjectId = mongojs.ObjectId;
 
+    var registration = require('./api/registration')
+    var eventService = require('./api/EventService');
+
     // ===========================================================
     // ========= server routes (Handles REST then delegate to database)
     // ===========================================================
@@ -24,11 +27,10 @@ module.exports = function (app) {
     app.post('/api/events', function (req, res) {
         var event = req.body;
         if (event._id !== undefined) {
-            updateEvent(event);
+            updateEvent(event, res);
         } else {
-            createEvent(event);
+            createEvent(event, res);
         }
-
         retrieveEvents(res);
     });
 
@@ -41,31 +43,34 @@ module.exports = function (app) {
     });
 
     // =========================================================
-    // =====Persistence functions below (HANDLES Database CRUD)
+    // =====Helper Funtions
     // =========================================================
     function retrieveEvents(res) {
-        db.events.find(function (err, events) {
-            if (err)
-                throw err;
-
-            res.json(events);
+        eventService.find(function (err, events) {
+            respond(res, events, err, 408);
         });
     }
 
-    function updateEvent(event) {
-        var id = ObjectId(event._id);
-        delete event._id;
-        db.events.update({"_id": id}, event, function (err, updated) {
-            if (err || !updated)
-                throw err;
-
-        });
+    function respond(res, data, err, errorCode) {
+        if (err) {
+            res.jsonp(errorCode, erro);
+        } else {
+            res.json(data);
+        }
     }
 
-    function createEvent(event) {
-        db.events.save(event, function (err, eventData) {
+    function updateEvent(event, res) {
+        eventService.update(event, function (err, data) {
             if (err) {
-                throw err;
+                res.jsonp(412, err);
+            }
+        });
+    }
+
+    function createEvent(event, res) {
+        eventService.create(event, function (err, createdEvent) {
+            if (err) {
+                res.jsonp(417, err);
             }
         });
     }
@@ -73,10 +78,8 @@ module.exports = function (app) {
     function userLoging(userLogingInfo, res) {
         db.user.find(userLogingInfo, function (err, userData) {
             if (err || !userData) {
-                console.log('in her');
                 res.jsonp(417, { message: 'Error while trying to login' });
             } else {
-                console.log("user = " + JSON.stringify(userData));
                 res.json(userData);
             }
 

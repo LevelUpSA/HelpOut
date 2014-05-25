@@ -13,7 +13,7 @@ angular.module('MainController', [])
             .then(function (events) {
                 $scope.events = events;
             }, function (error) {
-                console.log('Error: ' + error + ' when retrieving events')
+                console.log('Error: ' + error);
             });
 
         $scope.logout = function () {
