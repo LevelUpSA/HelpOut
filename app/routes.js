@@ -7,11 +7,12 @@ module.exports = function (app) {
     var db = mongojs.connect(dburl, collections);
     var ObjectId = mongojs.ObjectId;
 
-    var registration = require('./api/UserService')
+    // Application services
+    var userService = require('./api/UserService')
     var eventService = require('./api/EventService');
 
     // ===========================================================
-    // ========= server routes (Handles REST then delegate to database)
+    // ========= server routes (Handles REST then delegate to the ServiceLayer)
     // ===========================================================
 
     app.post('/api/registration', function (req, res) {
@@ -82,18 +83,12 @@ module.exports = function (app) {
             } else {
                 res.json(userData);
             }
-
         });
     }
 
     function registerUser(user, res) {
-        db.user.save(user, function (err, user) {
-            if (err)
-                res.jsonp(err);
-
-            console.log("user = " + JSON.stringify(user));
-            res.json(user);
+        userService.register(user, function (err, createdUser) {
+            respond(res, createdUser, err, 417);
         });
     }
-
 };

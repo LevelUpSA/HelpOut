@@ -40,7 +40,6 @@ describe('Test eventController', function(){
         $rootScope.createEvent();
 
         $httpBackend.flush();
-        expect($rootScope.event).toEqual('ok');
     });
 
     it('should edit an event', function(){

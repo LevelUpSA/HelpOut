@@ -14,7 +14,6 @@ describe('Test Registration Controller', function(){
 
         var $controller = $injector.get('$controller');
         registrationController = $controller('RegistrationController', {'$scope': $rootScope});
-
     }));
 
     afterEach(function(){

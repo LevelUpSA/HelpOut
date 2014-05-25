@@ -1,23 +1,20 @@
-/**
- * Created by sydney on 5/24/14.
- */
+var resource = require('./ResourceManager');
+var entity = 'user';
 
-function register(req, res) {
-    var user = req.body;
-
-    registerUser(user, res);
+function UserService() {
 }
 
+UserService.prototype.register = function (user, callBack) {
 
-function registerUser(user, res) {
-    connection.user.save(user, function (err, user) {
-        if (err)
-            res.jsonp(err);
+    //validations will be here
 
-        console.log("user = " + JSON.stringify(user));
-        res.json(user);
+    entityManager().save(user, function (err, createdUser) {
+        callBack(err, createdUser);
     });
 }
 
+function entityManager() {
+    return resource.getEntityByName(entity);
+}
 
-//module.export.register  = register;
+module.exports = exports = new UserService();
