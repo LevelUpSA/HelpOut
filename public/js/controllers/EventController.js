@@ -12,8 +12,9 @@ angular.module('EventController', [])
         $scope.eventAction = "Add Event";
 
         $scope.createEvent = function () {
-
-            $scope.event['user'] = loginService.getUser().email;
+            if( loginService.getUser() ) {
+                $scope.event['user'] = loginService.getUser().email;
+            }
             $http.post('/api/events', $scope.event)
                 .success(function (response) {
                     $scope.events = response;
