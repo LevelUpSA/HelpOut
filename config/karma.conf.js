@@ -18,8 +18,8 @@ module.exports = function(config) {
       '../public/lib/angular/angular.min.js',
       '../public/lib/**/*.js',
       '../public/js/**/*.js',
-      '../Tests/frontend/angular-mocks.js',
-      '../Tests/frontend/*Test.js',
+      '../tests/frontend/angular-mocks.js',
+      '../tests/frontend/*Test.js',
     ],
 
 
