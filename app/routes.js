@@ -1,12 +1,5 @@
 module.exports = function (app) {
 
-    // database configuration
-    var dburl = 'localhost/helpout';
-    var collections = ['events', 'user'];
-    var mongojs = require('mongojs');
-    var db = mongojs.connect(dburl, collections);
-    var ObjectId = mongojs.ObjectId;
-
     // Application services
     var userService = require('./api/UserService')
     var eventService = require('./api/EventService');
@@ -22,17 +15,24 @@ module.exports = function (app) {
 
     app.post('/api/login', function (req, res) {
         var userLogingInfo = req.body;
-        userLoging(userLogingInfo, res);
+        userLoging(userLogingInfo, res, req);
+    });
+
+    app.post('/api/logout', function(req, res){
+        delete req.session.isAuthenticated;
+        res.json('Logged out');
     });
 
     app.post('/api/events', function (req, res) {
-        var event = req.body;
-        if (event._id !== undefined) {
-            updateEvent(event, res);
-        } else {
-            createEvent(event, res);
+        if(isValidRequest(req,res)) {
+            var event = req.body;
+            if (event._id !== undefined) {
+                updateEvent(event, res);
+            } else {
+                createEvent(event, res);
+            }
+            retrieveEvents(res);
         }
-        retrieveEvents(res);
     });
 
     app.get('/api/events', function (req, res) {
@@ -46,6 +46,16 @@ module.exports = function (app) {
     // =========================================================
     // =====Helper Funtions
     // =========================================================
+
+    function isValidRequest(req, res){
+        if( !req.session.isAuthenticated || req.session.isAuthenticated == null) {
+            res.jsonp(401, 'Authentication required to access this resource');
+            return false;
+        } else{
+            return true;
+        }
+    }
+
     function retrieveEvents(res) {
         eventService.find(function (err, events) {
             respond(res, events, err, 408);
@@ -54,7 +64,7 @@ module.exports = function (app) {
 
     function respond(res, data, err, errorCode) {
         if (err) {
-            res.jsonp(errorCode, erro);
+            res.jsonp(errorCode, err);
         } else {
             res.json(data);
         }
@@ -76,13 +86,12 @@ module.exports = function (app) {
         });
     }
 
-    function userLoging(userLogingInfo, res) {
-        db.user.find(userLogingInfo, function (err, userData) {
-            if (err || !userData) {
-                res.jsonp(417, { message: 'Error while trying to login' });
-            } else {
-                res.json(userData);
+    function userLoging(userLogingInfo, res,req) {
+        userService.login(userLogingInfo, function(err, userData){
+            if(userData){
+                req.session.isAuthenticated = true;
             }
+            respond(res,userData,err, 417);
         });
     }
 

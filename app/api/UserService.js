@@ -13,6 +13,23 @@ UserService.prototype.register = function (user, callBack) {
     });
 }
 
+UserService.prototype.login = function(userInfo, callBack) {
+
+    if(!userInfo.email || userInfo.email === '' ){
+        callBack('Email not entered', '');
+    }
+    else if( !userInfo.password || userInfo.password === ''){
+        callBack('Password not entered', '');
+    } else {
+        entityManager().find(userInfo, function (err, userData) {
+            if (!err)
+                delete userData.password;
+
+            callBack(err, userData);
+        });
+    }
+}
+
 function entityManager() {
     return resource.getEntityByName(entity);
 }

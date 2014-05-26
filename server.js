@@ -4,6 +4,9 @@
 	var port = process.env.PORT || 8000; // set our port
 
     app.configure(function() {
+
+        app.use(express.cookieParser());                    // setting up session
+        app.use(express.session({secret: 'trewq1234'}));    // setting up session secret id
 		app.use(express.static(__dirname + '/public')); 	// set the static files location /public/img will be /img for users
 		app.use(express.logger('dev')); 					// log every request to the console
 		app.use(express.bodyParser()); 						// have the ability to pull information from html in POST

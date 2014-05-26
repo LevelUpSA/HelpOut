@@ -7,6 +7,7 @@ describe('Test eventController', function(){
     //mock Application to allow us to inject our own dependencies
     beforeEach(module('HelpOutApp'));
     beforeEach(module('EventController'));
+    beforeEach(module('LoginService'));
 
     beforeEach(inject(function($injector){
         // set up the mocks
@@ -34,7 +35,7 @@ describe('Test eventController', function(){
         expect($rootScope.eventAction).toBe('Add Event');
         expect($rootScope.subTitle).toBe('Create an event');
         // mocks the http.post call in createEvent method
-        $httpBackend.expectPOST('/api/events').respond(201,'ok');
+        $httpBackend.expectPOST('/api/events').respond(201,'');
         expect(eventController).toBeDefined();
 
         $rootScope.createEvent();

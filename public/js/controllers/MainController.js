@@ -17,8 +17,13 @@ angular.module('MainController', [])
             });
 
         $scope.logout = function () {
-            LoginService.logout();
-            $location.path('/');
+            LoginService.logout()
+                .then(function(msg){
+                    console.log(msg);
+                    $location.path('/');
+                }, function(error){
+                    console.log('Error '+ error)
+                });
         }
 
     }]);

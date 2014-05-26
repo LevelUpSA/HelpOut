@@ -44,7 +44,6 @@ describe('Test LoginController', function(){
 
         //WHEN
         $rootScope.login(loginInfo);
-
         $httpBackend.flush();
 
     });

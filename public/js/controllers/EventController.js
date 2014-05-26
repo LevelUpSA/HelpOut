@@ -4,7 +4,7 @@
  */
 
 angular.module('EventController', [])
-    .controller('EventController', ['$scope', '$http', function ($scope, $http) {
+    .controller('EventController', ['$scope', '$http', 'LoginService', function ($scope, $http, loginService) {
 
         $scope.subTitle = 'Create an event';
         $scope.eventEdit = 'this';
@@ -13,9 +13,7 @@ angular.module('EventController', [])
 
         $scope.createEvent = function () {
 
-            if ($scope.user != undefined) {
-                $scope.event['user'] = $scope.user;
-            }
+            $scope.event['user'] = loginService.getUser().email;
             $http.post('/api/events', $scope.event)
                 .success(function (response) {
                     $scope.events = response;
@@ -25,7 +23,6 @@ angular.module('EventController', [])
                 .error(function (err) {
                     console.log('Error ' + JSON.stringify(err));
                 });
-
         };
 
         $scope.changeIsCreateBtn = function () {

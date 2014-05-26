@@ -10,7 +10,7 @@ angular.module('LoginService', [])
                     .success(function(user){
                         if(user.length == 1){
                             deferred.resolve(user);
-                            authenticatedUser = user;
+                            authenticatedUser = user[0];
                         } else {
                             deferred.reject('Incorrect login details');
                          }
@@ -33,7 +33,17 @@ angular.module('LoginService', [])
             },
 
             logout: function(){
+                var deffered = $q.defer();
+
+                $http.post('/api/logout').success(function(successful){
+                    deffered.resolve('Logged out');
+                }).error(function(err){
+                    deffered.reject(err)
+                });
+
                 authenticatedUser = null;
+
+                return deffered.promise;
             }
         }
     }]);
