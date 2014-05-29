@@ -7,7 +7,6 @@ module.exports = function (app) {
     // ===========================================================
     // ========= server routes (Handles REST then delegate to the ServiceLayer)
     // ===========================================================
-
     app.post('/api/registration', function (req, res) {
         var user = req.body;
         registerUser(user, res);
@@ -46,7 +45,6 @@ module.exports = function (app) {
     // =========================================================
     // =====Helper Funtions
     // =========================================================
-
     function isValidRequest(req, res){
         if( !req.session.isAuthenticated || req.session.isAuthenticated == null) {
             res.jsonp(401, 'Authentication required to access this resource');
@@ -97,6 +95,9 @@ module.exports = function (app) {
 
     function registerUser(user, res) {
         userService.register(user, function (err, createdUser) {
+            if(createdUser){
+                req.session.isAuthenticated = true;
+            }
             respond(res, createdUser, err, 417);
         });
     }

@@ -13,9 +13,9 @@ Event.prototype.find = function (callBack) {
     });
 }
 
-Event.prototype.update = function(event, callBack){
+Event.prototype.update = function (event, callBack) {
 
-    if(event.name == '' || event.name === undefined ){
+    if (event.name == '' || event.name === undefined) {
         err = 'Event name cannot be Empty';
         callBack(err, event);
     } else {
@@ -27,11 +27,20 @@ Event.prototype.update = function(event, callBack){
     }
 }
 
-Event.prototype.create = function(event, callBack){
-
-    entityManager().save(event, function (err, createdEvent) {
-        callBack(err, createdEvent);
-    });
+Event.prototype.create = function (event, callBack) {
+    if (event.name == '' || event.name === undefined) {
+        callBack('Name cannot be empty', event);
+    } else if (event.location == '' || event.location === undefined) {
+        callBack('Location cannot be empty', event);
+    } else if (event.date == '' || event.date === undefined) {
+        callBack('Date cannot be empty', event);
+    } else if (event.time == '' || event.time === undefined) {
+        callBack('Time cannot be empty', event);
+    } else {
+        entityManager().save(event, function (err, createdEvent) {
+            callBack(err, createdEvent);
+        });
+    }
 
 }
 

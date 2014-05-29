@@ -5,16 +5,26 @@ function UserService() {
 }
 
 UserService.prototype.register = function (user, callBack) {
-
-    //validations will be here
-
-    entityManager().save(user, function (err, createdUser) {
-        callBack(err, createdUser);
-    });
-}
+    if(!user.email || user.email === ''){
+        callBack('Email not entered','');
+    }  else if(!user.password || user.password === ''){
+        callBack('Password not entered','');
+    } else if(!user.name || user.name === ''){
+        callBack('Name not entered','');
+    } else if(!user.surname || user.surname === ''){
+        callBack('Surname not entered','');
+    } else if(!user.country || user.country === ''){
+        callBack('Country not entered','');
+    } else if(!user.city || user.city === ''){
+        callBack('City not entered','');
+    } else {
+        entityManager().save(user, function (err, createdUser) {
+            callBack(err, createdUser);
+        });
+    }
+};
 
 UserService.prototype.login = function(userInfo, callBack) {
-
     if(!userInfo.email || userInfo.email === '' ){
         callBack('Email not entered', '');
     }
@@ -24,11 +34,10 @@ UserService.prototype.login = function(userInfo, callBack) {
         entityManager().find(userInfo, function (err, userData) {
             if (!err)
                 delete userData.password;
-
             callBack(err, userData);
         });
     }
-}
+};
 
 function entityManager() {
     return resource.getEntityByName(entity);
