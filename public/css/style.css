@@ -51,6 +51,17 @@
 .search input[type='date']{
     width: 170px;
 }
+
+.event-panel{
+    width: 309px;
+    height: 184px;
+    margin-right: 20px;
+}
+
+.event-container{
+    padding: 0;
+}
+
 .event-create{
     width: 390px;
     padding-bottom: 10px;

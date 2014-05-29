@@ -31,9 +31,8 @@
         </p>
     </div>
 
-    <div>
-
-        <div class="panel panel-default" ng-repeat="event in events | filter:searchEvent">
+    <div class="container event-container">
+        <div class="panel panel-default event-panel pull-left" ng-repeat="event in events | filter:searchEvent">
             <div class="panel-heading  text-left">
                 <strong class="text-primary">{{event.name}}</strong>
             </div>
